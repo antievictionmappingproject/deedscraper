@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script language="JavaScript" type="text/javascript"><!--
+
+if ( typeof( foundCookie ) == 'undefined' )
+{
+   var foundCookie=false;
+   if ( window.opener && typeof( window.opener.foundCookie ) != 'undefined' )
+   {
+      foundCookie=window.opener.foundCookie;
+   }
+   else if ( document.cookie.indexOf( 'cq_allow_progress=yes', 0 ) > -1 )
+   {
+      document.cookie='cq_allow_progress=no; expires=Thu, 01-Jan-1990 00:00:01 GMT';
+      foundCookie=true;
+   }
+}
+var cqcs_utils_loaded = false;
+
+// --></script>
+<script type='text/javascript' language='JavaScript' src='/cqcs/cqcs_utils.js'></script>
+
+<title>Document Details</title>
+<meta name="generator" 
+ content="Cyberquery WebReports Version Linux/AMD64 7.30, Cyberscience Corporation" />
+<meta http-equiv="Content-Language" content="en" />
+<meta name="author" content="AtPac" />
+<meta name="date" content="2014-02-28T17:06:41-08:00" />
+<meta name="CQCS-Report-Type" content="List" />
+<meta name="CQCS-Report-Pages" content="1" />
+<link rel="shortcu icon" href="/images/favicon.ico"  />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+<meta http-equiv="expires" content="0" />
+<link rel="shortcut icon" href="/images/favicon.ico"  />
+<link rel="stylesheet" type="text/css" href="/styles/order.css"  />
+<script language="JavaScript" type="text/javascript"><!--
+
+// This gets a named element on both IE4+ and NS6+.
+function getElement( name )
+{
+   if ( document.getElementById )
+   {
+      return document.getElementById( name );
+   }
+   else
+   {
+      return document.all[ name ];
+   }
+}
+
+function on_link_click()
+{
+   var argv = on_link_click.arguments;
+   var argc = argv.length;
+   var popupContents = "<table>";
+   var container = getElement( 'popupcontainer' );
+
+   for ( var i = 2; i < argc; i += 2 )
+   {
+      popupContents += "<tr><td nowrap=\"nowrap\">&nbsp;<a href=\"" + argv[i].replace(/"/g, '&quot;') + "\">" + argv[i+1].replace(/"/g, '&quot;') + "</a>&nbsp;</td></tr>";
+   }
+   popupContents += "</table>"
+
+   // Do we have innerHTML support?
+   if ( document.body && ( typeof container.innerHTML == "string" ) )
+   {
+      // Calculate the position of the popup, by adding up the positions of all the clicked link's parents.
+      popupLeft = 0;
+      popupTop = 0;
+      for ( e = getElement( 'linkpopup' + argv[0] ); e != null; e = e.offsetParent )
+      {
+         popupLeft += e.offsetLeft;
+         popupTop += e.offsetTop;
+      }
+
+      // Build the popup's HTML and add it to the container.
+      style = "position: absolute; left: "+(popupLeft+10)+"px; top: "+(popupTop+10)+ "px; background-color: white; border: 1px solid black; padding: 5px;";
+
+      // an IE4 bug - the span width defaults to very wide.
+      style += ( navigator.userAgent.toLowerCase().indexOf( 'msie 4' ) != -1 ) ? "width: 10%;" : "";
+
+      container.innerHTML = "<span style='"+style+"'>"+popupContents+"</span>";
+
+      // Show the popup container (because a previous onBodyClick might have hidden it).
+      container.style.display = '';
+
+      // Lose the dotted line around the link, because otherwise it shows through the popup.
+      getElement( 'linkpopup' + argv[0] ).blur();
+
+      return( undefined );
+   }
+   else
+   {
+      // browser not capable - jump to a simple page of links
+      base = window.location.href.substr( 0, window.location.href.length -
+                                             ( window.location.search +
+                                               window.location.hash ).length );
+      base = base.replace( /\/[^\/]*$/, "/" );
+
+      popupContents = "<h1>Choose a link for <em>" + argv[1] + "</em>:</h1><ul>";
+
+      for ( var i = 2; i < argc; i += 2 )
+      {
+         if ( !( /^[a-z]+:/i.test( argv[i] ) ) )
+         {
+            // the URL does not start with a protocol - add the document base
+            argv[i] = base + argv[i];
+         }
+         popupContents += "<li><a href=\"" + argv[i].replace(/"/g, '&quot;') + "\">" + argv[i+1].replace(/"/g, '&quot;') + "</a></li>";
+      }
+
+      popupContents += "</ul>";
+
+      return ( popupContents );
+   }
+}
+
+function on_body_click()
+{
+   // We can't remove the HTML of the popup, because in NS6 that pulls the rug out when you click
+   // a link in the popup, and the browser doesn't follow the link.  Hide the popup container instead.
+   if ( getElement( 'popupcontainer' ) ) getElement( 'popupcontainer' ).style.display = 'none';
+}
+
+// --></script>
+</head>
+<body onclick="on_body_click()" text="#000000" alink="#FF0000" link="#0000FF" vlink="#800080">
+<span id="popupcontainer"></span>
+<a name="Top" id="Top"></a>
+<a name="Top_7781_20140301010641_0" id="Top_7781_20140301010641_0"></a>
+<div id="container"> 
+		<center><a href="http://www.criis.com"> 
+		<img src="/images/criis_banner.png" id="criis_logo" alt="criis_banner.png"/></a> 
+		</center><div id="top_nav"><div id="hori_nav"> 
+		<ul><li id="topnav_1" title="CRiis.com Home"> 
+		<a href="/index.html">CRiis Home</a></li> 
+		<li id="topnav_2" title="Contact"> 
+		<a href="/contact.html">Contact</a></li> 
+		<li id="topnav_3" title="AtPac Home"> 
+		<a href="http://www.egovinc.com/">AtPac Home</a></li> 
+		</ul></div></div>
+<center><h1><u>Search Results</u></h1></center>
+<table cellspacing="0" cellpadding="1" style="align:center; 
+		width:100%; " border="0" width="90%">
+<tr>
+<th nowrap="nowrap" colspan="3" align="center"><h2><font face="Arial, Helvetica" size="+2"><b>Document Details</b></font></h2></th>
+</tr>
+</table>
+<table class="records" cellspacing="0" cellpadding="1" id="report_table_1" style="font-family: Tahoma,Geneva,sans-serif; 
+		width:98%; 
+		border-collpase:collapse; 
+		text-align:left; 
+		margin-left:auto; 
+		margin-right:auto; 
+REPORT_TABLE.class: records" border="0" width="90%">
+<tr>
+<td colspan="2" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="2" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Record</b></font></td>
+<td colspan="2" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="2" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="4" bgcolor="#005DAD">&nbsp;</td>
+<td bgcolor="#005DAD">&nbsp;</td>
+<td colspan="4" align="center" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>GrantoR</b></font></td>
+<td bgcolor="#005DAD">&nbsp;</td>
+<td bgcolor="#005DAD">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Year</b></font></td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Document</b></font></td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Date</b></font></td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Reel</b></font></td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Image</b></font></td>
+<td nowrap="nowrap" colspan="4" align="center" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Document Type</b></font></td>
+<td bgcolor="#005DAD">&nbsp;</td>
+<td colspan="4" align="center" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>GranteE</b></font></td>
+<td bgcolor="#005DAD">&nbsp;</td>
+<td bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF"><b>Name</b></font></td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2"><font face="Arial, Helvetica">2008</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">I603689-00</font></td>
+<td colspan="2"><font face="Arial, Helvetica">06/25/2008</font></td>
+<td colspan="2"><font face="Arial, Helvetica">J670</font></td>
+<td colspan="2"><font face="Arial, Helvetica">0151</font></td>
+<td>&nbsp;</td>
+<td colspan="2"><font face="Arial, Helvetica">DEED</font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2"><font face="Arial, Helvetica">R</font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td nowrap="nowrap"><font face="Arial, Helvetica">CUTLER ELEANOR D</font></td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2"><font face="Arial, Helvetica">R</font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td nowrap="nowrap"><font face="Arial, Helvetica">CUTLER ROBERT N</font></td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2"><font face="Arial, Helvetica">E</font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td nowrap="nowrap"><font face="Arial, Helvetica">CUTLER ELEANOR D</font></td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2"><font face="Arial, Helvetica">E</font></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td nowrap="nowrap"><font face="Arial, Helvetica">CUTLER ROBERT N</font></td>
+</tr>
+</table>
+<div class="clearfooter"></div> 
+		</div><!-- End Container--> 
+		<div id="footer"><center> 
+		<table><tbody><tr><td> 
+		<table width="135" border="0" cellpadding="2" cellspacing="0" 
+		title="Click to Verify - This site chose VeriSign SSL for secure 
+		e-commerce and confidential communications."> 
+		<tbody><tr> 
+		<td width="135" align="center" valign="top"><script 
+		type="text/javascript" 
+		src="https://seal.verisign.com/getseal?host_name=www.criis.com&amp;size=L&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"> 
+		</script><br /> 
+		<a href="http://www.verisign.com/ssl-certificate/" 
+		target="_blank"  style="color:#000000; text-decoration:none; 
+		font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; 
+		margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a></td> 
+		</tr> </tbody>
+		</table></td> 
+		<td width="400" align="right"> 
+		<ul><li>Copyright &copy;&nbsp;2010&nbsp;AtPac &emsp; &emsp; 
+		<a href="http://www.egovinc.com/terms.php">Terms of Use</a> 
+		<a href="http://www.egovinc.com/privacy/php">Privacy Policy</a> 
+		<br/><br/></li> 
+		<li>13300 New Airport Rd. Suite 101 Auburn, CA 95602</li> 
+		</ul></td><td width="300" align="right"><center> 
+		<img height="90px" style="border:medium none;" 
+		alt="AtPac Homepage" src="/images/atpac_logo2.png"/> 
+		</center></td></tr></tbody></table></center> 
+		</div>
+</body>
+</html>
+

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<script language="JavaScript" type="text/javascript"><!--
+
+if ( typeof( foundCookie ) == 'undefined' )
+{
+   var foundCookie=false;
+   if ( window.opener && typeof( window.opener.foundCookie ) != 'undefined' )
+   {
+      foundCookie=window.opener.foundCookie;
+   }
+   else if ( document.cookie.indexOf( 'cq_allow_progress=yes', 0 ) > -1 )
+   {
+      document.cookie='cq_allow_progress=no; expires=Thu, 01-Jan-1990 00:00:01 GMT';
+      foundCookie=true;
+   }
+}
+var cqcs_utils_loaded = false;
+
+// --></script>
+<script type='text/javascript' language='JavaScript' src='/cqcs/cqcs_utils.js'></script>
+
+<title>Document List By APN</title>
+<meta name="generator" 
+ content="Cyberquery WebReports Version Linux/AMD64 7.30, Cyberscience Corporation" />
+<meta http-equiv="Content-Language" content="en" />
+<meta name="author" content="AtPac" />
+<meta name="date" content="2014-02-27T17:24:27-08:00" />
+<meta name="CQCS-Report-Type" content="List" />
+<meta name="CQCS-Report-Pages" content="1" />
+<link rel="shortcu icon" href="/images/favicon.ico"  />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="post-check=1, pre-check=2" />
+<meta http-equiv="Expires" content="-1" />
+<link rel="shortcut icon" href="/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/styles/order.css"  />
+<script language="JavaScript" type="text/javascript"><!--
+
+// This gets a named element on both IE4+ and NS6+.
+function getElement( name )
+{
+   if ( document.getElementById )
+   {
+      return document.getElementById( name );
+   }
+   else
+   {
+      return document.all[ name ];
+   }
+}
+
+function on_link_click()
+{
+   var argv = on_link_click.arguments;
+   var argc = argv.length;
+   var popupContents = "<table>";
+   var container = getElement( 'popupcontainer' );
+
+   for ( var i = 2; i < argc; i += 2 )
+   {
+      popupContents += "<tr><td nowrap=\"nowrap\">&nbsp;<a href=\"" + argv[i].replace(/"/g, '&quot;') + "\">" + argv[i+1].replace(/"/g, '&quot;') + "</a>&nbsp;</td></tr>";
+   }
+   popupContents += "</table>"
+
+   // Do we have innerHTML support?
+   if ( document.body && ( typeof container.innerHTML == "string" ) )
+   {
+      // Calculate the position of the popup, by adding up the positions of all the clicked link's parents.
+      popupLeft = 0;
+      popupTop = 0;
+      for ( e = getElement( 'linkpopup' + argv[0] ); e != null; e = e.offsetParent )
+      {
+         popupLeft += e.offsetLeft;
+         popupTop += e.offsetTop;
+      }
+
+      // Build the popup's HTML and add it to the container.
+      style = "position: absolute; left: "+(popupLeft+10)+"px; top: "+(popupTop+10)+ "px; background-color: white; border: 1px solid black; padding: 5px;";
+
+      // an IE4 bug - the span width defaults to very wide.
+      style += ( navigator.userAgent.toLowerCase().indexOf( 'msie 4' ) != -1 ) ? "width: 10%;" : "";
+
+      container.innerHTML = "<span style='"+style+"'>"+popupContents+"</span>";
+
+      // Show the popup container (because a previous onBodyClick might have hidden it).
+      container.style.display = '';
+
+      // Lose the dotted line around the link, because otherwise it shows through the popup.
+      getElement( 'linkpopup' + argv[0] ).blur();
+
+      return( undefined );
+   }
+   else
+   {
+      // browser not capable - jump to a simple page of links
+      base = window.location.href.substr( 0, window.location.href.length -
+                                             ( window.location.search +
+                                               window.location.hash ).length );
+      base = base.replace( /\/[^\/]*$/, "/" );
+
+      popupContents = "<h1>Choose a link for <em>" + argv[1] + "</em>:</h1><ul>";
+
+      for ( var i = 2; i < argc; i += 2 )
+      {
+         if ( !( /^[a-z]+:/i.test( argv[i] ) ) )
+         {
+            // the URL does not start with a protocol - add the document base
+            argv[i] = base + argv[i];
+         }
+         popupContents += "<li><a href=\"" + argv[i].replace(/"/g, '&quot;') + "\">" + argv[i+1].replace(/"/g, '&quot;') + "</a></li>";
+      }
+
+      popupContents += "</ul>";
+
+      return ( popupContents );
+   }
+}
+
+function on_body_click()
+{
+   // We can't remove the HTML of the popup, because in NS6 that pulls the rug out when you click
+   // a link in the popup, and the browser doesn't follow the link.  Hide the popup container instead.
+   if ( getElement( 'popupcontainer' ) ) getElement( 'popupcontainer' ).style.display = 'none';
+}
+
+// --></script>
+</head>
+<body onclick="on_body_click()" text="#000000" alink="#FF0000" link="#0000FF" vlink="#800080">
+<span id="popupcontainer"></span>
+<a name="Top" id="Top"></a>
+<a name="Top_22225_20140228012427_0" id="Top_22225_20140228012427_0"></a>
+<div id="container"> 
+		<center><a href="http://www.criis.com"> 
+		<img src="/images/criis_banner.png" id="criis_logo"></a> 
+		</center><div id="top_nav"><div id="hori_nav"> 
+		<ul><li id="topnav_1" title="CRiis.com Home"> 
+		<a href="/index.html">CRiis Home</a></li> 
+		<li id="topnav_2" title="Contact"> 
+		<a href="/contact.html">Contact</a></li> 
+		<li id="topnav_3" title="AtPac Home"> 
+		<a href="http://www.egovinc.com/">AtPac Home</a></li> 
+		</ul></div></div><center>
+<center><H1><U>Search Results</U></H1></CENTER>
+<table cellspacing="0" cellpadding="1" style="align:center; 
+		width:100%;" border="0" width="90%">
+<tr>
+<th nowrap="nowrap" colspan="3" align="center"><h2><font face="Arial, Helvetica" size="+2"><b>Document List By APN</b></font></h2></th>
+</tr>
+</table>
+<table class="records" cellspacing="0" cellpadding="1" id="report_table_1" style="font-family: Tahoma,Geneva,sans-serif; 
+		width:98%; 
+		border-collpase:collapse; 
+		text-align:left; 
+		margin-left:auto; 
+		margin-right:auto;" border="0" width="90%">
+<tr>
+<td colspan="5">&nbsp;</td>
+<td nowrap="nowrap" colspan="9"><font face="Arial, Helvetica">APN Query Search Results</font></td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="5">&nbsp;</td>
+<td nowrap="nowrap" colspan="9"><font face="Arial, Helvetica">Criteria: 2133A-002B</font></td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="4" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="3" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF">Block/Lot</font></td>
+<td bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF">Record</font></td>
+<td colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF">Date</font></td>
+<td colspan="4" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF">Document</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#005DAD"><font face="Arial, Helvetica" color="#FFFFFF">Doc Type</font></td>
+</tr>
+<tr>
+<td colspan="5" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="9" bgcolor="#005DAD">&nbsp;</td>
+<td colspan="2" bgcolor="#005DAD">&nbsp;</td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5096403&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5096403&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">09/20/2010</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">J052321-00</font></td>
+<td colspan="2"><font face="Arial, Helvetica">NOTICE</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5016190&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5016190&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">05/05/2010</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">I962923-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE OF DEFAULT</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5008352&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=5008352&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">04/26/2010</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">I959217-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">RESCISSION/CANCEL NOTICE OF DEFAULT</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=4624495&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=4624495&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">06/25/2008</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">I603689-00</font></td>
+<td colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">DEED</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=3392429&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=3392429&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">07/11/2003</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">H483525-00</font></td>
+<td colspan="2"><font face="Arial, Helvetica">RECONVEYANCE</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=3358958&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=3358958&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">06/04/2003</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">H453619-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">DEED OF TRUST</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2964874&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2964874&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">01/30/2002</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">H099384-00</font></td>
+<td colspan="2"><font face="Arial, Helvetica">RECONVEYANCE</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2931702&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2931702&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">12/14/2001</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">H069381-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">DEED OF TRUST</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2572816&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2572816&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">03/01/2000</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">G741487-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">DEED OF TRUST</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2399161&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=2399161&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">05/14/1999</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">G584223-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1942641&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1942641&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">05/22/1997</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">G164861-01</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">DEED OF TRUST</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1710065&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1710065&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">03/22/1996</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F947421-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1680455&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1680455&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">01/25/1996</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F919851-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1429728&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1429728&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">09/22/1994</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F685371-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1429727&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1429727&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">09/22/1994</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F685370-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1420076&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1420076&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">09/19/1994</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F675863-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1415889&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1415889&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">09/16/1994</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F671756-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1346240&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1346240&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">05/19/1994</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F608589-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1343662&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1343662&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">05/18/1994</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F606108-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1319739&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1319739&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">04/13/1994</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F585102-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1265314&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1265314&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">01/31/1994</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F537350-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1259381&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1259381&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">01/21/1994</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F531925-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1135126&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1135126&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">08/18/1993</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F417696-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">RELEASE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1106386&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=1106386&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3" bgcolor="#BBE0FF"><font face="Arial, Helvetica">07/15/1993</font></td>
+<td nowrap="nowrap" colspan="4" bgcolor="#BBE0FF"><font face="Arial, Helvetica">F391081-00</font></td>
+<td nowrap="nowrap" colspan="2" bgcolor="#BBE0FF"><font face="Arial, Helvetica">NOTICE LIEN</font></td>
+</tr>
+<tr>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=785778&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_N" title="Document Details">Show Name Detail</a></font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica"><a href="/cgi-bin/new_get_recorded.cgi?l_doc_ref_no=785778&amp;COUNTY=sanfrancisco&amp;YEARSEGMENT=current&amp;SEARCH_TYPE=DETAIL_A" title="Document Details">Show APN Detail</a></font></td>
+<td nowrap="nowrap" colspan="3"><font face="Arial, Helvetica">2133A-002B</font></td>
+<td colspan="3"><font face="Arial, Helvetica">04/03/1992</font></td>
+<td nowrap="nowrap" colspan="4"><font face="Arial, Helvetica">F095416-00</font></td>
+<td nowrap="nowrap" colspan="2"><font face="Arial, Helvetica">DEED OF TRUST</font></td>
+</tr>
+<tr>
+<td colspan="5">&nbsp;</td>
+<td colspan="11">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="5">&nbsp;</td>
+<td nowrap="nowrap" colspan="11"><font face="Arial, Helvetica">End of Report</font></td>
+</tr>
+</table>
+<div class="clearfooter"></div> 
+		</div><!-End Container-><div id="footer"><center> 
+		<table><tbody><tr><td> 
+		<table width="135" border="0" cellpadding="2" cellspacing="0" 
+		title="Click to Verify - This site chose VeriSign SSL for secure 
+		e-commerce and confidential communications."> 
+		<tr> 
+		<td width="135" align="center" valign="top"><script 
+		type="text/javascript" 
+		src="https://seal.verisign.com/getseal?host_name=www.criis.com&amp;size=L&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"> 
+		</script><br /> 
+		<a href="http://www.verisign.com/ssl-certificate/" 
+		target="_blank"  style="color:#000000; text-decoration:none; 
+		font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; 
+		margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a></td> 
+		</tr> 
+		</table> 
+		<td width="400" align="right"> 
+		<ul><li>Copyright &copy;&nbsp;2010&nbsp;AtPac &emsp; &emsp; 
+		<a href="http://www.egovinc.com/terms.php">Terms of Use</a> 
+		<a href="http://www.egovinc.com/privacy.php">Privacy Policy</a> 
+		</li><br><br> 
+		<li>13300 New Airport Rd. Suite 101 Auburn, CA 95602</li> 
+		</ul></td><td width="300" align="right"><center> 
+		<img height="90px" style="border:medium none;" 
+		alt="AtPac Homepage" src="/images/atpac_logo2.png"> </a> 
+		</center></td></tr></tbody></table></center> 
+		</div>
+</body>
+</html>
+
