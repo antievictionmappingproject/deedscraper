@@ -1,160 +1,118 @@
-import httplib, urllib
+#!/usr/bin/env python
 import csv
-from HTMLParser import HTMLParser
+from datetime import datetime 
+import httplib, urllib
+import sys
+import time
+import deedScraperLib as ds
+import logging
+import traceback
 
-def request_deed_list(conn, block, lot):
-    headers = {
-        "Content-type": "application/x-www-form-urlencoded", 
-        "Accept": "text/html",
-        "User-Agent": "sararcher@outlook.com"
-    }
-    params = urllib.urlencode({
-        "BLOCK": block, 
-        "LOT": lot,
-        "SEARCH_TYPE": "APN",
-        "COUNTY": "sanfrancisco",
-        "YEARSEGMENT": "current",
-        "ORDER_TYPE": "Recorded+Official"
-    })
-    
-    conn.request("POST", "/cgi-bin/new_get_recorded.cgi", params, headers)
-    response = conn.getresponse()
-    if response.status != 302:
-        raise Exception("No redirect returned") 
+output_file_name    = './deed_scraper.out'
+error_file_name     = './deed_scraper.err'  
+throttle_default    = 200
 
-    redirect_url = response.getheader("Location")
+def usage():
+    print
+    print 'Usage: ./deedScraper INPUT_FILENAME [THROTTLE]'
+    print
+    print 'INPUT_FILENAME is a CSV file with 2 columns - the first is block number and the second is lot number'
+    print 'THROTTLE is time delay per request - defaults to ', throttle_default, 'ms'
+    print 
+    print 'Writes output file containing details of the deeds ', output_file_name
+    print 'Writes error file containing block/lot numbers where deeds could not be obtained', error_file_name
+    print
+    print
+    sys.exit(2)
 
-    conn.request("GET", redirect_url)
-    response = conn.getresponse()
-    if response.status != 200:
-        raise Exception("Get request failed") 
+def parse_commandline_arguments(argv):
+    input_file = ''
+    throttle = throttle_default
 
-    return response.read()
-  
+    try:
+        if len(argv) != 1 and len(argv) != 2:
+            usage()
 
-def get_attribute(list, attribute):
-    for item in list:
-        if item[0] == attribute:
-            return item[1]
-    return None
+        input_file = argv[0]
 
+        if len(argv) == 2:
+            throttle = float(argv[1])
 
-class DeedListParser(HTMLParser):
-    def __init__(self):
-        HTMLParser.__init__(self)
-        self.in_records_table = False
-        self.record = -1
-        self.column = -1
-        self.data_row = False
-        self.data = []
+    except Exception, e:
+        print str(e)
+        usage()
 
-    def handle_starttag(self, tag, attrs):
-        if tag == 'table' and get_attribute(attrs, 'class') == 'records': 
-            self.in_records_table = True
-            self.record = -1
-            self.column = -1
-        elif tag == 'tr':
-            self.record +=1
-            self.column = -1
-        elif tag =='td':
-            self.column += 1
-        elif tag=='a' and self.in_records_table and self.column == 0:
-            href = get_attribute(attrs, 'href')
-            if href is not None:
-                self.data_row = True
-                self.data.append([href])
-           
-    def handle_endtag(self, tag):
-        if tag == 'table' and self.in_records_table:
-             self.in_records_table = False
-        elif tag == 'tr':
-            self.data_row = False
-
-    def handle_data(self, data):
-        data = data.rstrip()
-        if self.data_row and self.column == 5 and data != '':
-            self.data[len(self.data)-1].append(data)
-
-    def get_urls(self): 
-        return [u[0] for u in self.data if u[1] == 'DEED']
-
-def parse_deed_list(data):
-    parser = DeedListParser()
-    parser.feed(data)
-    urls = parser.get_urls()
-    return urls
-
-def request_deed(conn, url):
-    conn.request("GET", url)
-    response = conn.getresponse() 
-    if response.status != 302:
-        raise Exception("No redirect returned") 
-    redirect_url = response.getheader("Location")
-
-    conn.request("GET", redirect_url)
-    response = conn.getresponse()
-    if response.status != 200:
-        raise Exception("Get request failed") 
-
-    return response.read()
-
-class DeedParser(HTMLParser):
-    def __init__(self):
-        HTMLParser.__init__(self)
-        self.in_records_table = False
-        self.record = -1
-        self.column = -1
-        self.data_row = False
-        self.in_font = False
-        self.data = {}
-        self.grantee = None
-        self.column_to_field = { 0: 'Year', 1: 'Document', 2: 'RecordDate', 3: 'Reel', 4: 'Image', 6: 'DocumentType' }
-        self.parties = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'table' and get_attribute(attrs, 'class') == 'records': 
-            self.in_records_table = True
-            self.record = -1
-            self.column = -1
-        elif tag == 'tr':
-            self.record +=1
-            self.column = -1
-        elif tag =='td':
-            self.column += 1
-        elif tag == 'font' and get_attribute(attrs, 'color') == None:
-            self.in_font = True
-           
-    def handle_endtag(self, tag):
-        if tag == 'table' and self.in_records_table:
-             self.in_records_table = False
-        elif tag == 'tr':
-            self.data_row = False
-        elif tag == 'font':
-            self.in_font = False
-
-    def handle_data(self, data):
-        if self.in_records_table and self.in_font:
-            if self.column in self.column_to_field:
-                self.data[self.column_to_field[self.column]] = data
-            elif self.column == 10:
-                self.grantee = data
-            elif self.column == 13:
-                self.parties.append((self.grantee, data)) 
-
-def parse_deed(data):
-    parser = DeedParser()
-    parser.feed(data)
-    return (parser.data, parser.parties)
-
-def write_data(file_obj, block, lot, data, parties):
-    writer = csv.writer(file_obj, quoting=csv.QUOTE_ALL)
-
-    for party in parties:
-        writer.writerow([block, lot, data['Year'], data['Document'], data['RecordDate'],
-                data['Reel'], data['Image'], data['DocumentType'], party[0], party[1]])
-
-    file_obj.flush
+    return (input_file, throttle)
 
 
+def main(argv):
+    #logging.basicConfig(level=logging.INFO)
+
+    website                       = 'www.criis.com'
+    (input_file_name, throttle)   = parse_commandline_arguments(argv)
+
+    print 'Throttle between requests ', throttle, 'ms'
+
+    conn = httplib.HTTPConnection(website)
+    print 'Connection to ', website, ' opened'
+
+    row_count = 0
+    start = datetime.now()
+
+    try:
+        with open(input_file_name, 'Ur') as input_file:
+            csv_reader = csv.reader(input_file)
+            print 'Input file: ', input_file_name, ' opened'
+
+            with open(output_file_name, 'w', 0) as output_file:
+                print 'Output file: ', output_file_name, ' opened'
+
+                with open(error_file_name, 'w', 0) as error_file:
+                    print 'Error file: ', error_file_name, ' opened'
+                    csv_error_writer = csv.writer(error_file, quoting=csv.QUOTE_ALL)
+
+                    for row in csv_reader:
+
+                            try:
+                                block = row[0]
+                                lot = row [1]
+
+                                row_count += 1
+
+                                # Throttle to ensure we do not overload website
+                                time.sleep(throttle / 1000.0)
+
+                                print 'Requesting data for Block: ', block, ' Lot: ', lot
+
+                                document = ds.request_deed_list(conn, block, lot)
+                                urls = ds.parse_deed_list(document)
+
+                                if len(urls) == 0:
+                                    raise Exception('Failed to find deeds')
+                                
+                                for url in urls:
+                                    deed = ds.request_deed(conn, url)
+                                    data, parties = ds.parse_deed(deed)
+
+                                    if len(parties) == 0:
+                                        raise Exception(str.format('Failed to find parties for deed {}', url))
+
+                                    print 'Writing data for Block: ', block, ' Lot: ', lot
+                                    ds.write_data(output_file, block, lot, data, parties)
+                            except Exception, e:
+                                logging.error('%s Block: %s Lot: %s', str(e), block, lot)
+                                logging.info(traceback.format_exc())
+                                csv_error_writer.writerow([block, lot, str(e)])
+    finally:
+        conn.close
+
+    end = datetime.now()
+    timetaken = end - start
+
+    print row_count, ' block/lot requests processed' 
+    print 'Time taken: ', timetaken.seconds, ' seconds ' 
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
 
 
