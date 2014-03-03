@@ -40,7 +40,7 @@ CSV file with details of any block/lot numbers for which deeds could not be obta
 Warning
 -------
 
-Do not browse www.criss.com while running deedScrapper as this may interfere with deedScraper. This is due to the way the www.criss.com website ahs been coded.
+Do not browse www.criis.com while running deedScrapper as this may interfere with deedScraper. This is due to the way the www.criis.com website ahs been coded.
 
 
 Ethics for running
