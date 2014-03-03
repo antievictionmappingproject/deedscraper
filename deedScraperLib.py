@@ -125,7 +125,7 @@ class DeedParser(HTMLParser):
         self.column = -1
         self.data_row = False
         self.in_font = False
-        self.data = {}
+        self.data = { 'Year': '', 'Document': '', 'RecordDate': '', 'Reel': '', 'Image': '', 'DocumentType': ''}
         self.grantee = None
         self.column_to_field = { 0: 'Year', 1: 'Document', 2: 'RecordDate', 3: 'Reel', 4: 'Image', 6: 'DocumentType' }
         self.parties = []

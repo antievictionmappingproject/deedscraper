@@ -6,6 +6,7 @@ import sys
 import time
 import deedScraperLib as ds
 import logging
+import socket
 import traceback
 
 output_file_name    = './deed_scraper.out'
@@ -44,18 +45,20 @@ def parse_commandline_arguments(argv):
 
     return (input_file, throttle)
 
+def create_connection():
+    website = 'www.criis.com'
+    conn    =  httplib.HTTPConnection(website, timeout=10)    
+    print 'Connection to ', website, ' opened'
+    return conn
 
 def main(argv):
     #logging.basicConfig(level=logging.INFO)
 
-    website                       = 'www.criis.com'
     (input_file_name, throttle)   = parse_commandline_arguments(argv)
-
     print 'Throttle between requests ', throttle, 'ms'
-
-    conn = httplib.HTTPConnection(website)
-    print 'Connection to ', website, ' opened'
-
+    
+    conn = create_connection()
+    time_out_errors = 0
     row_count = 0
     start = datetime.now()
 
@@ -76,33 +79,56 @@ def main(argv):
                             try:
                                 block = row[0]
                                 lot = row [1]
-
                                 row_count += 1
 
-                                # Throttle to ensure we do not overload website
-                                time.sleep(throttle / 1000.0)
+                                obtained_deeds = False
 
-                                print 'Requesting data for Block: ', block, ' Lot: ', lot
+                                for retry in range(0, 3):
 
-                                document = ds.request_deed_list(conn, block, lot)
-                                urls = ds.parse_deed_list(document)
+                                    # Throttle to ensure we do not overload website
+                                    time.sleep(throttle / 1000.0)
 
-                                if len(urls) == 0:
-                                    raise ds.DSException('Failed to find deeds')
-                                
-                                for url in urls:
-                                    deed = ds.request_deed(conn, url)
-                                    data, parties = ds.parse_deed(deed)
+                                    print 'Requesting data for Block: ', block, ' Lot: ', lot
 
-                                    if len(parties) == 0:
-                                        raise ds.DSException(str.format('Failed to find parties for deed {}', url))
+                                    try:
+                                        document = ds.request_deed_list(conn, block, lot)
+                                        urls = ds.parse_deed_list(document)
 
-                                    print 'Writing data for Block: ', block, ' Lot: ', lot
-                                    ds.write_data(output_file, block, lot, data, parties)
+                                        if len(urls) == 0:
+                                            raise ds.DSException('Failed to find deeds')
+                                        
+                                        for url in urls:
+                                            deed = ds.request_deed(conn, url)
+                                            data, parties = ds.parse_deed(deed)
+
+                                            if len(parties) == 0:
+                                                raise ds.DSException(str.format('Failed to find parties for deed {}', url))
+
+                                            print 'Writing data for Block: ', block, ' Lot: ', lot
+                                            ds.write_data(output_file, block, lot, data, parties)
+                                            obtained_deeds = True
+                                            break
+
+                                    except socket.timeout, e:
+                                        conn.close
+                                        conn = create_connection()
+                                        logging.error('%s Block: %s Lot: %s', str(e), block, lot)
+                                        logging.info(traceback.format_exc())
+                                        logging.error('retrying...')
+
+                                if not obtained_deeds:
+                                    time_out_errors += 1
+                                    if time_out_errors < 10:
+                                        raise ds.DSException('Timeout after 3 attempts')
+                                    else:
+                                        raise Exception('There have been 10 timeout errors - aborting')
+
+
                             except ds.DSException, e:
                                 logging.error('%s Block: %s Lot: %s', str(e), block, lot)
                                 logging.info(traceback.format_exc())
                                 csv_error_writer.writerow([block, lot, str(e)])
+
     finally:
         conn.close
 
