@@ -88,18 +88,18 @@ def main(argv):
                                 urls = ds.parse_deed_list(document)
 
                                 if len(urls) == 0:
-                                    raise Exception('Failed to find deeds')
+                                    raise ds.DSException('Failed to find deeds')
                                 
                                 for url in urls:
                                     deed = ds.request_deed(conn, url)
                                     data, parties = ds.parse_deed(deed)
 
                                     if len(parties) == 0:
-                                        raise Exception(str.format('Failed to find parties for deed {}', url))
+                                        raise ds.DSException(str.format('Failed to find parties for deed {}', url))
 
                                     print 'Writing data for Block: ', block, ' Lot: ', lot
                                     ds.write_data(output_file, block, lot, data, parties)
-                            except Exception, e:
+                            except ds.DSException, e:
                                 logging.error('%s Block: %s Lot: %s', str(e), block, lot)
                                 logging.info(traceback.format_exc())
                                 csv_error_writer.writerow([block, lot, str(e)])

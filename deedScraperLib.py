@@ -3,6 +3,10 @@ import csv
 from HTMLParser import HTMLParser
 import logging
 
+class DSException(Exception):
+       def __init__(self, value):
+        Exception.__init__(self, value)
+
 def request_deed_list(conn, block, lot):
     headers = {
         'Content-type': 'application/x-www-form-urlencoded', 
@@ -24,7 +28,7 @@ def request_deed_list(conn, block, lot):
     logging.info('Received response to /cgi-bin/new_get_recorded.cgi')
 
     if response.status != 302:
-        raise Exception('request_deed_list - No redirect returned') 
+        raise DSException('request_deed_list - No redirect returned') 
 
     redirect_url = response.getheader('Location')
 
@@ -34,7 +38,7 @@ def request_deed_list(conn, block, lot):
     logging.info('Received response to %s', redirect_url)
 
     if response.status != 200:
-        raise Exception('request_deed_list - Get request failed') 
+        raise DSException('request_deed_list - Get request failed') 
 
     return response.read()
   
